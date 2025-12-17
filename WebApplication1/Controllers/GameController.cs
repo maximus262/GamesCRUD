@@ -43,7 +43,6 @@ public class GamesController(IGameService gameService) : ControllerBase
     public async Task<IActionResult> Update(int id, UpdateGameDto updatedGame)
     {
         var updated = await gameService.UpdateAsync(id, updatedGame);
-
         return updated ? NoContent() : NotFound();
     }
 
@@ -52,7 +51,6 @@ public class GamesController(IGameService gameService) : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var deleted = await gameService.DeleteAsync(id);
-
         return deleted ? NoContent() : NotFound();
     }
 }

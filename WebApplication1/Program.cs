@@ -13,7 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<GameStoreContext>(options =>
-    options.UseSqlServer(connString));
+    options
+    .UseSqlServer(connString));
 
 builder.Services.AddScoped<IGameService, GameService>();
 builder.Services
