@@ -8,7 +8,7 @@ using WebApplication1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Group 1: Database & Identity
+
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<GameStoreContext>(options => options.UseSqlServer(connString));
 
@@ -16,7 +16,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>() // Standard Identity
     .AddEntityFrameworkStores<GameStoreContext>()
     .AddDefaultTokenProviders();
 
-// Group 2: Authentication & JWT
+
 builder.Services.AddAuthentication(options => {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -36,7 +36,6 @@ builder.Services.AddAuthentication(options => {
 
 builder.Services.AddAuthorization();
 
-// Group 3: Custom Services
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IGameService, GameService>();
@@ -45,25 +44,11 @@ builder.Services.AddScoped<IPublisherService, PublisherService>();
 
 var app = builder.Build();
 
-// Group 4: Seeding Roles
-using (var scope = app.Services.CreateScope())
-{
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    string[] roles = { "User", "Publisher", "Admin" };
-
-    foreach (var role in roles)
-    {
-        if (!await roleManager.RoleExistsAsync(role))
-        {
-            await roleManager.CreateAsync(new IdentityRole(role));
-        }
-    }
-}
 
 // Group 5: Middleware Pipeline
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-app.MigrateDb(); // Your custom extension to run migrations
+app.MigrateDb(); 
 app.Run();

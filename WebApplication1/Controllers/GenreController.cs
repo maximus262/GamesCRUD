@@ -22,7 +22,7 @@ public class GenreController( IGenreService genreService) : ControllerBase
     public async Task<ActionResult<GenreDto>> GetById(int id)
     {
         var genre = await genreService.GetByIdAsync(id);
-        // Implementation for getting a genre by ID can be added here
+        
         return Ok(genre);
     }
 }

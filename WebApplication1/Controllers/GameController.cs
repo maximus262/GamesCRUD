@@ -27,7 +27,7 @@ public class GamesController(IGameService gameService) : ControllerBase
 
     
     [HttpPost]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Publisher")]
     public async Task<ActionResult<GameDto>> Create(CreateGameDto newGame)
     {
         var createdGame = await gameService.CreateAsync(newGame);
