@@ -9,7 +9,7 @@ namespace WebApplication1.Controllers;
 [ApiController]
 public class GamesController(IGameService gameService) : ControllerBase
 {
-    // GET: api/games
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<GameDto>>> GetAll()
     {
@@ -17,7 +17,7 @@ public class GamesController(IGameService gameService) : ControllerBase
         return Ok(games);
     }
 
-    // GET: api/games/5
+   
     [HttpGet("{id}")]
     public async Task<ActionResult<GameDto>> GetById(int id)
     {
@@ -25,7 +25,7 @@ public class GamesController(IGameService gameService) : ControllerBase
         return game is null ? NotFound() : Ok(game);
     }
 
-    // POST: api/games
+    
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult<GameDto>> Create(CreateGameDto newGame)
@@ -38,7 +38,7 @@ public class GamesController(IGameService gameService) : ControllerBase
             createdGame);
     }
 
-    // PUT: api/games/5
+    
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, UpdateGameDto updatedGame)
     {
@@ -46,7 +46,7 @@ public class GamesController(IGameService gameService) : ControllerBase
         return updated ? NoContent() : NotFound();
     }
 
-    // DELETE: api/games/5
+    
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
