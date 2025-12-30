@@ -12,6 +12,8 @@ public class GamesController(IGameService gameService) : ControllerBase
     
     [HttpGet]
     public async Task<ActionResult<IEnumerable<GameDto>>> GetAll()
+
+
     {
         var games = await gameService.GetAllAsync();
         return Ok(games);
@@ -31,7 +33,6 @@ public class GamesController(IGameService gameService) : ControllerBase
     public async Task<ActionResult<GameDto>> Create(CreateGameDto newGame)
     {
         var createdGame = await gameService.CreateAsync(newGame);
-
         return CreatedAtAction(
             nameof(GetById),
             new { id = createdGame.Id },

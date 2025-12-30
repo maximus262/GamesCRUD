@@ -48,7 +48,7 @@ var app = builder.Build();
 // Group 5: Middleware Pipeline
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseHttpsRedirection();
 app.MapControllers();
 app.MigrateDb(); 
 app.Run();

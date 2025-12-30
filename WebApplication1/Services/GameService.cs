@@ -19,7 +19,7 @@ public class GameService(GameStoreContext dbContext) : IGameService
             .AsNoTracking()
             .ToListAsync();
     }
-
+    
     public async Task<GameDto?> GetByIdAsync(int id)
     {
         var game = await dbContext.Games
@@ -74,7 +74,7 @@ public class GameService(GameStoreContext dbContext) : IGameService
 
         await dbContext.SaveChangesAsync();
         return true;
-    }
+    }   
 
     public async Task<bool> DeleteAsync(int id)
     {
